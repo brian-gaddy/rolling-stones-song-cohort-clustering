@@ -1,0 +1,25 @@
+{
+  "rows_raw": 1610,
+  "rows_clean": 1610,
+  "columns": 19,
+  "duplicate_rows_removed": 0,
+  "audio_feature_count": 11,
+  "audio_features": [
+    "acousticness",
+    "danceability",
+    "energy",
+    "instrumentalness",
+    "liveness",
+    "loudness",
+    "speechiness",
+    "tempo",
+    "valence",
+    "popularity",
+    "duration_ms"
+  ],
+  "unique_songs": 954,
+  "unique_albums": 90,
+  "avg_popularity": 20.788198757763976,
+  "max_popularity": 80.0,
+  "top_album_by_avg_popularity": "Sticky Fingers (Remastered)"
+}
