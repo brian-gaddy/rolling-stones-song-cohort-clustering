@@ -1,5 +1,5 @@
 import pandas as pd
-from src.analyze_song_cohorts import load_and_clean, build_cluster_features
+from src.analyze_song_cohorts import build_cluster_features, create_cluster_names, load_and_clean
 
 
 def test_load_and_clean_removes_duplicates(tmp_path):
@@ -18,12 +18,26 @@ def test_load_and_clean_removes_duplicates(tmp_path):
     assert "release_year" in clean.columns
 
 
-def test_build_cluster_features_returns_numeric_matrix():
+def test_build_cluster_features_returns_numeric_matrix_and_scaler():
     df = pd.DataFrame({
         "danceability": [0.5, 0.7, 0.9],
         "energy": [0.7, 0.6, 0.8],
         "popularity": [50, 60, 70],
     })
-    X_scaled, features = build_cluster_features(df)
+    X_scaled, features, scaler = build_cluster_features(df)
     assert X_scaled.shape == (3, 3)
     assert features == ["danceability", "energy", "popularity"]
+    assert hasattr(scaler, "transform")
+
+
+def test_create_cluster_names_returns_business_friendly_labels():
+    cluster_profile = pd.DataFrame({
+        "energy": [0.9, 0.2],
+        "danceability": [0.8, 0.3],
+        "acousticness": [0.1, 0.9],
+        "popularity": [70, 40],
+        "song_count": [10, 8],
+    }, index=[0, 1])
+    names = create_cluster_names(cluster_profile)
+    assert set(names.keys()) == {0, 1}
+    assert all(name.endswith("Cohort") for name in names.values())
