@@ -2,13 +2,13 @@
 
 ## Overview
 
-This project uses Spotify audio-feature data for Rolling Stones songs to create **song cohorts** that can support music recommendation and playlist strategy. The workflow includes exploratory data analysis, feature engineering, dimensionality reduction, KMeans clustering, t-SNE visualization, and cluster profiling.
+This project uses Spotify audio-feature data for Rolling Stones songs to create **song cohorts** that can support music recommendation and playlist strategy. The upgraded workflow includes exploratory data analysis, feature engineering, KMeans clustering, model comparison, cluster naming, PCA, t-SNE visualization, model artifact export, and a Streamlit dashboard.
 
 The project is based on a machine learning course-end project scenario focused on creating cohorts of songs for improved recommendations.
 
 ## Business Problem
 
-Streaming platforms improve engagement when they recommend content that aligns with user preferences. This project groups similar songs using Spotify audio features so that recommendation teams can better understand song similarity, listening cohorts, and potential playlist segments.
+Streaming platforms improve engagement when they recommend content that aligns with user preferences. This project groups similar songs using Spotify audio features so recommendation teams can understand song similarity, listening cohorts, and potential playlist segments.
 
 ## Dataset
 
@@ -24,10 +24,12 @@ Streaming platforms improve engagement when they recommend content that aligns w
 - Data inspection and duplicate removal
 - Feature selection from Spotify audio attributes
 - Standardization of numerical audio features
-- KMeans clustering
-- Silhouette-score based cluster review
-- t-SNE dimensionality reduction for visualization
-- Cluster profiling by song attributes
+- KMeans clustering with silhouette-score based cluster review
+- Gaussian Mixture and DBSCAN comparison baselines
+- PCA and t-SNE dimensionality reduction for visualization
+- Automated business-friendly cluster naming
+- Cluster profiling by audio attributes
+- Model artifact export with `joblib`
 
 ## Main Visualization
 
@@ -41,6 +43,21 @@ Streaming platforms improve engagement when they recommend content that aligns w
 
 ![Danceability vs Energy](figures/danceability_vs_energy.png)
 
+## Generated Outputs
+
+Running `src/analyze_song_cohorts.py` regenerates:
+
+- `data/processed/rolling_stones_song_clusters.csv`
+- `data/processed/cluster_profile.csv`
+- `data/processed/model_comparison.csv`
+- `data/processed/model_selection_scores.json`
+- `figures/clusters_tsne_generated.png`
+- `figures/clusters_pca_generated.png`
+- `models/scaler.joblib`
+- `models/kmeans_model.joblib`
+- `models/pca_model.joblib`
+- `models/cluster_metadata.joblib`
+
 ## Repository Structure
 
 ```text
@@ -48,6 +65,7 @@ rolling-stones-song-cohort-clustering/
 ├── README.md
 ├── PROJECT_REPORT.md
 ├── PROBLEM_STATEMENT.md
+├── MODEL_CARD.md
 ├── requirements.txt
 ├── LICENSE
 ├── .gitignore
@@ -98,8 +116,8 @@ pytest -q
 
 ## Technologies
 
-Python · pandas · NumPy · scikit-learn · Matplotlib · Plotly · Streamlit · Jupyter Notebook
+Python · pandas · NumPy · scikit-learn · Matplotlib · Plotly · Streamlit · Jupyter Notebook · joblib
 
 ## Portfolio Relevance
 
-This project demonstrates unsupervised machine learning, clustering, dimensionality reduction, feature engineering, model selection, data visualization, and recommendation-system thinking.
+This project demonstrates unsupervised machine learning, clustering, dimensionality reduction, model comparison, feature engineering, model artifact management, data visualization, and recommendation-system thinking.
